@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CalculadorNotas</string>
+    <string name="total_preguntas">¿Cuántas preguntas hay en total?</string>
+    <string name="resta_fallo">¿Cuánto resta cada fallo?</string>
+    <string name="total_respuestas">¿Cuánto preguntas has respondido?</string>
+    <string name="calcular">Calcular</string>
+    <string name="acertadas">Acertadas</string>
+    <string name="falladas">Falladas</string>
+    <string name="nota_total">Nota total</string>
+    <string name="nota_diez">Nota sobre 10</string>
+</resources>
