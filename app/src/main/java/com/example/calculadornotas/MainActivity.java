@@ -1,9 +1,11 @@
 package com.example.calculadornotas;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         EditText respuestas = findViewById(R.id.txtRespuestas);
         EditText preguntas = findViewById(R.id.txtPreguntas);
 
@@ -63,13 +66,22 @@ public class MainActivity extends AppCompatActivity {
                 totalPreguntas = Integer.parseInt(preguntas.getText().toString());
                 totalRespuestas = Integer.parseInt(respuestas.getText().toString());
                 opcionResta = spinner.getSelectedItemPosition();
-                Log.i("*", "totalPreguntas es " + totalPreguntas);
-                Log.i("*", "totalRespuestas es " + totalRespuestas);
-                Log.i("*", "opcionResta es " + opcionResta);
-                setContentView(R.layout.nota_final);
-                NotaAdapter adapter = new NotaAdapter(MainActivity.this, calcularNotas());
-                ListView lv = findViewById(R.id.listView);
-                lv.setAdapter(adapter);
+                mostrarNotas();
+            }
+        });
+    }
+
+    private void mostrarNotas() {
+        setContentView(R.layout.nota_final);
+        NotaAdapter adapter = new NotaAdapter(MainActivity.this, calcularNotas());
+        ListView lv = findViewById(R.id.listView);
+        lv.setAdapter(adapter);
+        Button bVolver = findViewById(R.id.bVolver);
+        bVolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                finish();
             }
         });
     }
@@ -107,5 +119,11 @@ public class MainActivity extends AppCompatActivity {
             notas.add(n);
         }
         return notas;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setContentView(R.layout.activity_main);
     }
 }
